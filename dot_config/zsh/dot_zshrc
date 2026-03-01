@@ -28,6 +28,7 @@ alias brow='arch --x86_64 /usr/local/Homebrew/bin/brew'
 
 # 1password https://developer.1password.com/docs/cli/get-started/#shell-completion
 eval "$(op completion zsh)"; compdef _op op
+source ${XDG_CONFIG_HOME}/op/plugins.sh
 
 # pnpm
 export PNPM_HOME="/Users/bkw/.config/pnpm"
