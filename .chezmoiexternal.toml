@@ -4,3 +4,10 @@
   refreshPeriod = "168h"
   [".config/zsh/.zprezto".clone]
     args = ["--recursive"]
+
+[".config/tmux/.oh-my-tmux"]
+  type = "archive"
+  url = "https://github.com/gpakosz/.tmux/archive/master.tar.gz"
+  exact = true
+  stripComponents = 1
+  refreshPeriod = "168h"
