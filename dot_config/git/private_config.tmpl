@@ -15,7 +15,6 @@
 	keepBackup = false
 	trustExitCode = false
 
-
 [mergetool "diffmerge"]
 	cmd = {{ .chezmoi.homeDir }}/bin/diffmergegit.sh \
 		--nosplash \
@@ -37,47 +36,64 @@
 [difftool "opendiff"]
 	cmd = opendiff $LOCAL $REMOTE
 
+[difftool "difftastic"]
+# See `man git-difftool` for a description of MERGED, LOCAL and REMOTE.
+	cmd = difft "$MERGED" "$LOCAL" "abcdef1" "100644" "$REMOTE" "abcdef2" "100644"
+
 [user]
 	email = {{ .email }}
 	name = {{ .name }}
 	signingkey = {{ .signingKey }}
 
-
 [branch]
 	autosetupmerge = false
+  sort = -committerdate
+
 [color]
 	diff = auto
 	ui = 1
 	enabled = 1
+
 [core]
-	pager = "less -+$LESS -FRX"
+	# pager = "less -+$LESS -FRX"
+	pager = delta
+
+[delta]
+	line-numbers = true
 
 [diff]
 	renamelimit = 0
 	renames = true
 	color-words = true
+
 [alias]
 	changes=diff --name-status -r
 	lg2 = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
 	lg = log --graph --pretty=format:'%Cred%h%Creset %C(cyan)%an%Creset - %C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
-
-[alias]
-# https://github.com/blog/985-git-io-github-url-shortener
+  # https://github.com/blog/985-git-io-github-url-shortener
 	shorten = "!sh -c 'curl -i http://git.io -F url=$1' -"
 	patdiff = difftool -y -x patdiff
+	undo = reserve --staged HEAD^
+
 [help]
 	autocorrect = 1
+
 [rerere]
 	enabled = 1
+
 [push]
 	default = simple
+	autoSetupRemote = true
+
 [filter "lfs"]
 	smudge = git-lfs smudge -- %f
 	required = true
 	clean = git-lfs clean -- %f
 	process = git-lfs filter-process
+
 [commit]
 	gpgSign = true
+
 [gpg]
 {{- if eq .chezmoi.os "darwin" }}
 {{-   if eq .chezmoi.arch "arm64" }}
@@ -89,17 +105,21 @@
 	program = gpg
 {{- end }}
 	format = ssh
+
 [pull]
 	rebase = true
+
 [rebase]
 	autoStash = true
-[difftool "difftastic"]
-# See `man git-difftool` for a description of MERGED, LOCAL and REMOTE.
-	cmd = difft "$MERGED" "$LOCAL" "abcdef1" "100644" "$REMOTE" "abcdef2" "100644"
+
+[init]
+	defaultBranch = main
+
 [pager]
 # Use a pager if the difftool output is larger than one screenful,
 # consistent with the behaviour of `git diff`.
 	difftool = true
+
 [gpg "ssh"]
 {{- if eq .chezmoi.os "darwin" }}
 	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
