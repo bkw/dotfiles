@@ -1,7 +1,7 @@
 # zpreztorc
 
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/runcoms/zpreztorc" ]]; then
-  source "${ZDOTDIR:-$HOME}/.zprezto/runcoms/zpreztorc" ]]
+  source "${ZDOTDIR:-$HOME}/.zprezto/runcoms/zpreztorc"
 fi
 
 zstyle ':prezto:*:*' color 'yes'
@@ -34,7 +34,7 @@ zstyle ':prezto:module:prompt' theme 'steeef'
 zstyle ':prezto:module:prompt' pwd-length 'long'
 zstyle ':prezto:module:prompt' show-return-val 'yes'
 
-zstyle ':prezto:module:ssh:load' identities 'bkw-2026' 'id_rsa' 'id_es25519'
+zstyle ':prezto:module:ssh:load' identities 'bkw-2026' 'id_rsa' 'id_ed25519'
 
 zstyle ':prezto:module:python:virtualenv' auto-switch 'yes'
 zstyle ':prezto:module:python:virtualenv' initialize 'yes'
