@@ -1,0 +1,96 @@
+# vim:se sta noet sw=2 sts=2 ts=2:
+[gui]
+#fontdiff = -family Chalkboard -size 12 -weight normal -slant roman -underline 0 -overstrike 0
+[merge]
+	diffstat = true
+	tool = opendiff
+#  tool = diffmerge
+
+[mergetool "p4merge"]
+	cmd = /Users/bkw/bin/p4mgit.sh \
+		"$PWD/$BASE" \
+		"$PWD/$REMOTE" \
+		"$PWD/$LOCAL" \
+		"$PWD/$MERGED"
+	keepBackup = false
+	trustExitCode = false
+
+
+[mergetool "diffmerge"]
+	cmd = /Users/bkw/bin/diffmergegit.sh \
+		--nosplash \
+		--result="$PWD/$MERGED" \
+		"$PWD/$BASE" \
+		"$PWD/$REMOTE" \
+		"$PWD/$LOCAL"
+	keepBackup = false
+	trustExitCode = false
+
+[diff]
+	external = difft
+	tool = difftastic
+
+[difftool]
+# Run the difftool immediately, don't ask 'are you sure' each time.
+	prompt = false
+
+[difftool "opendiff"]
+	cmd = opendiff $LOCAL $REMOTE
+
+[user]
+	email = bkw@weisshuhn.de
+	name = Bernhard Weisshuhn (a.k.a. bernhorst)
+	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILp9Vcp2lhdPfk5qLkC8JJFcejkBlHe1s7uoI0xfXsIG
+
+
+[branch]
+	autosetupmerge = false
+[color]
+	diff = auto
+	ui = 1
+	enabled = 1
+[core]
+	pager = "less -+$LESS -FRX"
+
+[diff]
+	renamelimit = 0
+	renames = true
+	color-words = true
+[alias]
+	changes=diff --name-status -r
+	lg2 = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
+	lg = log --graph --pretty=format:'%Cred%h%Creset %C(cyan)%an%Creset - %C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
+
+[alias]
+# https://github.com/blog/985-git-io-github-url-shortener
+	shorten = "!sh -c 'curl -i http://git.io -F url=$1' -"
+	patdiff = difftool -y -x patdiff
+[help]
+	autocorrect = 1
+[rerere]
+	enabled = 1
+[push]
+	default = simple
+[filter "lfs"]
+	smudge = git-lfs smudge -- %f
+	required = true
+	clean = git-lfs clean -- %f
+	process = git-lfs filter-process
+[commit]
+	gpgSign = true
+[gpg]
+	program = /usr/local/bin/gpg
+	format = ssh
+[pull]
+	rebase = true
+[rebase]
+	autoStash = true
+[difftool "difftastic"]
+# See `man git-difftool` for a description of MERGED, LOCAL and REMOTE.
+	cmd = difft "$MERGED" "$LOCAL" "abcdef1" "100644" "$REMOTE" "abcdef2" "100644"
+[pager]
+# Use a pager if the difftool output is larger than one screenful,
+# consistent with the behaviour of `git diff`.
+	difftool = true
+[gpg "ssh"]
+	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
