@@ -47,7 +47,7 @@
 
 [branch]
 	autosetupmerge = false
-  sort = -committerdate
+	sort = -committerdate
 
 [color]
 	diff = auto
@@ -73,7 +73,7 @@
   # https://github.com/blog/985-git-io-github-url-shortener
 	shorten = "!sh -c 'curl -i http://git.io -F url=$1' -"
 	patdiff = difftool -y -x patdiff
-	undo = reserve --staged HEAD^
+	undo = reset --staged HEAD^
 
 [help]
 	autocorrect = 1
