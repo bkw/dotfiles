@@ -27,8 +27,10 @@ alias youtube-dl='noglob youtube-dl'
 alias brow='arch --x86_64 /usr/local/Homebrew/bin/brew'
 
 # 1password https://developer.1password.com/docs/cli/get-started/#shell-completion
-eval "$(op completion zsh)"; compdef _op op
-source ${XDG_CONFIG_HOME}/op/plugins.sh
+if (( $+commands[op] )); then
+  eval "$(op completion zsh)"; compdef _op op
+  source ${XDG_CONFIG_HOME}/op/plugins.sh
+fi
 
 # pnpm
 export PNPM_HOME="{{ .chezmoi.homeDir }}/.config/pnpm"
@@ -45,10 +47,14 @@ export PNPM_HOME="{{ .chezmoi.homeDir }}/.config/pnpm"
 
 # fnm
 FNM_PATH="$HOME/.local/share/fnm"
-eval "$(fnm env --use-on-cd --shell zsh)"
+if (( $+commands[fnm] )); then
+  eval "$(fnm env --use-on-cd --shell zsh)"
+fi
 
 # zoxide
-eval "$(zoxide init zsh)"
+if (( $+commands[zoxide] )); then
+  eval "$(zoxide init zsh)"
+fi
 
 # Added by LM Studio CLI (lms)
 # End of LM Studio CLI section
