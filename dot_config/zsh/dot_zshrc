@@ -1,0 +1,72 @@
+# zshrc (interactive shells)
+
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]
+fi
+
+# fzf
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Do not share history between screen tabs:
+unsetopt sharehistory
+
+alias -- +x='chmod +x'
+alias vim=nvim
+
+# Google Cloud
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/bkw/code/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/bkw/code/google-cloud-sdk/path.zsh.inc'; fi
+if [ -f '/Users/bkw/code/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/bkw/code/google-cloud-sdk/completion.zsh.inc'; fi
+
+# source /Users/bkw/.config/broot/launcher/bash/br
+
+alias curl='noglob curl'
+alias youtube-dl='noglob youtube-dl'
+
+# intel homebrew:
+alias brow='arch --x86_64 /usr/local/Homebrew/bin/brew'
+
+# 1password https://developer.1password.com/docs/cli/get-started/#shell-completion
+eval "$(op completion zsh)"; compdef _op op
+
+# pnpm
+export PNPM_HOME="/Users/bkw/.config/pnpm"
+# case ":$PATH:" in
+#   *":$PNPM_HOME:"*) ;;
+#  *) export PATH="$PNPM_HOME:$PATH" ;;
+# esac
+# pnpm end
+
+# nvm
+# export NVM_DIR="$HOME/.nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# fnm
+FNM_PATH="$HOME/.local/share/fnm"
+eval "$(fnm env --use-on-cd --shell zsh)"
+
+# zoxide
+eval "$(zoxide init zsh)"
+
+# Added by LM Studio CLI (lms)
+# End of LM Studio CLI section
+
+
+export LE_WORKING_DIR="${XDG_CONFIG_HOME}/acme.sh"
+alias acme.sh="${XDG_CONFIG_HOME}/acme.sh/acme.sh --home ${XDG_CONFIG_HOME}/acme.sh/"
+alias acme='acme.sh --home "$XDG_CONFIG_HOME"/acme.sh/'
+# $. "/Users/bkw/.acme.sh/acme.sh.env"
+#
+alias wget="wget --hsts-file=$XDG_DATA_HOME/wget-hsts"
+
+alias lzd='lazydocker'
+alias lzg='lazygit'
+alias lg='lazygit'
+
+# all terminal windoes have their own session but shared windows share the same session.
+tmux-shared() {
+  local base=shared
+  local view="view-${TTY:t}"   # zsh: :t = tail (basename)
+  exec tmux new-session -A -s "$view" -t "$base"
+}

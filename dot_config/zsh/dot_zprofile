@@ -1,0 +1,47 @@
+# zprofile (login shells, before zshrc)
+
+# prezto:
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/runcoms/zprofile" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zprezto/runcoms/zprofile" ]]
+fi
+
+# Local overrides:
+
+
+#
+# Editors
+#
+
+if [[ -z "$EDITOR" ]]; then
+  export EDITOR='nvim'
+fi
+if [[ -z "$VISUAL" ]]; then
+  export VISUAL='nvim'
+fi
+
+#
+# Language
+#
+
+export LC_CTYPE=$LANG
+export LC_MESSAGES=$LANG
+
+#
+# Paths
+#
+
+# Set the list of directories that Zsh searches for programs.
+path=(
+  $HOME/{,s}bin(N)
+  /opt/homebrew/opt/ffmpeg-full/bin
+  /opt/{homebrew,local}/{,s}bin(N)
+  /usr/local/{,s}bin(N)
+  $path
+  $HOME/.local/bin
+  $XDH_DATA_HOME/go/bin
+  $HOME/Library/Arduino15/packages/esp32/tools/esp-x32/2302/bin
+  $XDH_DATA_HOME/cargo/bin
+  $HOME/.config/pnpm
+  $HOME/.deno/bin
+  # $HOME/.lmstudio/bin
+)

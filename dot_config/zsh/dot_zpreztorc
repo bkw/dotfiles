@@ -1,0 +1,52 @@
+# zpreztorc
+
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/runcoms/zpreztorc" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zprezto/runcoms/zpreztorc" ]]
+fi
+
+zstyle ':prezto:*:*' color 'yes'
+
+# Set the Prezto modules to load (browse modules).
+# The order matters.
+zstyle ':prezto:load' pmodule \
+  'environment' \
+  'terminal' \
+  'editor' \
+  'homebrew' \
+  'history' \
+  'directory' \
+  'spectrum' \
+  'utility' \
+  'completion' \
+  'history-substring-search' \
+  'prompt' \
+  'osx' \
+  'autosuggestions' \
+  'node' \
+  'python'
+
+zstyle ':prezto:module:editor' key-bindings 'emacs'
+zstyle ':prezto:module:editor' dot-expansion 'no'
+
+zstyle ':prezto:module:osx:man' dash-keyword 'manpages'
+
+zstyle ':prezto:module:prompt' theme 'steeef'
+zstyle ':prezto:module:prompt' pwd-length 'long'
+zstyle ':prezto:module:prompt' show-return-val 'yes'
+
+zstyle ':prezto:module:ssh:load' identities 'bkw-2026' 'id_rsa' 'id_es25519'
+
+zstyle ':prezto:module:python:virtualenv' auto-switch 'yes'
+zstyle ':prezto:module:python:virtualenv' initialize 'yes'
+
+
+zstyle ':prezto:module:syntax-highlighting' highlighters \
+  'main' \
+  'brackets' \
+  'pattern' \
+  'line' \
+  'cursor' \
+  'root'
+
+zstyle ':prezto:module:tmux:auto-start' local 'yes'
+
