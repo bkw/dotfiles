@@ -1,0 +1,5 @@
+github.com:
+    user: bkw
+    git_protocol: ssh
+    users:
+        bkw: {}
