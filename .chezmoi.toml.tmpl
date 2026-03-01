@@ -1,0 +1,17 @@
+[onepassword]
+mode = "account"
+
+[[textconv]]
+pattern = "**/*.plist"
+command = "plutil"
+args = ["-convert", "xml1", "-o", "-", "-"]
+
+[git]
+autoCommit = true
+autoPush = true
+
+[data]
+name = {{ onepasswordRead "op://Private/Dotfiles data/name" | quote }}
+email = {{ onepasswordRead "op://Private/Dotfiles data/email" | quote }}
+signingKey = {{ onepasswordRead "op://Private/Dotfiles data/signing-key" | quote }}
+githubUser = {{ onepasswordRead "op://Private/Dotfiles data/github-user" | quote }}

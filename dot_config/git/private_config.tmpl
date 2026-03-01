@@ -7,7 +7,7 @@
 #  tool = diffmerge
 
 [mergetool "p4merge"]
-	cmd = /Users/bkw/bin/p4mgit.sh \
+	cmd = {{ .chezmoi.homeDir }}/bin/p4mgit.sh \
 		"$PWD/$BASE" \
 		"$PWD/$REMOTE" \
 		"$PWD/$LOCAL" \
@@ -17,7 +17,7 @@
 
 
 [mergetool "diffmerge"]
-	cmd = /Users/bkw/bin/diffmergegit.sh \
+	cmd = {{ .chezmoi.homeDir }}/bin/diffmergegit.sh \
 		--nosplash \
 		--result="$PWD/$MERGED" \
 		"$PWD/$BASE" \
@@ -38,9 +38,9 @@
 	cmd = opendiff $LOCAL $REMOTE
 
 [user]
-	email = bkw@weisshuhn.de
-	name = Bernhard Weisshuhn (a.k.a. bernhorst)
-	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILp9Vcp2lhdPfk5qLkC8JJFcejkBlHe1s7uoI0xfXsIG
+	email = {{ .email }}
+	name = {{ .name }}
+	signingkey = {{ .signingKey }}
 
 
 [branch]
@@ -79,7 +79,15 @@
 [commit]
 	gpgSign = true
 [gpg]
+{{- if eq .chezmoi.os "darwin" }}
+{{-   if eq .chezmoi.arch "arm64" }}
+	program = /opt/homebrew/bin/gpg
+{{-   else }}
 	program = /usr/local/bin/gpg
+{{-   end }}
+{{- else }}
+	program = gpg
+{{- end }}
 	format = ssh
 [pull]
 	rebase = true
@@ -93,4 +101,8 @@
 # consistent with the behaviour of `git diff`.
 	difftool = true
 [gpg "ssh"]
+{{- if eq .chezmoi.os "darwin" }}
 	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
+{{- else }}
+	program = op-ssh-sign
+{{- end }}
