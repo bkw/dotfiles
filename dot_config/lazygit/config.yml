@@ -1,0 +1,19 @@
+gui:
+  tabWidth: 2
+  nerdFontsVersion: "3"
+
+git:
+  mainBranches:
+    - master
+    - main
+    - dev
+  autoFetch: true
+  autoRefresh: true
+  skipHookPrefix: WIP
+  branchPrefix: "bkw/"
+
+confirmOnQuit: true
+disableStartupPopups: true
+
+os:
+  editPreset: "nvim"
