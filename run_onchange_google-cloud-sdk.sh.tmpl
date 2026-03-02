@@ -1,0 +1,13 @@
+#!/bin/bash
+
+set -eu
+
+{{ if stat "../google-cloud-sdk/VERSION" }}
+# filled by the template engine to trigger re-runs of this script on version changes
+# gcloud version: {{ include "../google-cloud-sdk/VERSION" }}
+{{ end }}
+
+gcloud_home = "$XDG_DATA_HOME"/google-cloud-sdk
+if [[ -f "$gcloud_home"/install.sh" ]]; then
+  "$gcloud_home/install.sh --usage-reporting=false --command-completion=false --path-update=false"
+fi
