@@ -38,6 +38,7 @@ path=(
   $XDG_DATA_HOME/go/bin
   $HOME/Library/Arduino15/packages/esp32/tools/esp-x32/2302/bin
   $XDG_DATA_HOME/cargo/bin
+  $XDG_DATA_HOME/google-cloud-sdk/bin
   $HOME/.config/pnpm
   $HOME/.deno/bin
   # $HOME/.lmstudio/bin

@@ -11,3 +11,10 @@
   exact = true
   stripComponents = 1
   refreshPeriod = "168h"
+
+[".local/share/google-cloud-sdk"]
+  type = "archive"
+  url = "https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-{{ .chezmoi.os }}-{{ if eq .chezmoi.arch "arm64" }}arm{{ else }}{{ .chezmoi.arch }}{{ end }}.tar.gz"
+  exact = true
+  refreshPeriod = "168h"
+  stripComponents = 1
