@@ -1,5 +1,11 @@
 # zshrc (interactive shells)
 
+# https://github.com/sorin-ionescu/prezto/issues/2103
+# Add homebrew-installed package completions to fpath
+if command -v brew > /dev/null; then
+    fpath+=$(brew --prefix)/share/zsh/site-functions
+fi
+
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
