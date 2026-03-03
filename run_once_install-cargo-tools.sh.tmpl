@@ -1,0 +1,14 @@
+#!/bin/bash
+
+set -euo pipefail
+
+export CARGO_HOME="${XDG_DATA_HOME:-{{ .chezmoi.homeDir }}/.local/share}/cargo"
+
+# Ensure cargo is available — install via rustup if not
+if ! command -v cargo &>/dev/null && ! [[ -x "$CARGO_HOME/bin/cargo" ]]; then
+  echo "Installing rustup..."
+  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --no-modify-path
+fi
+
+echo "Installing cargo tools..."
+"$CARGO_HOME/bin/cargo" install tree-sitter-cli
