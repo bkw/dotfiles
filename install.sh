@@ -19,7 +19,11 @@ fi
 
 if ! op account list --format=json 2>/dev/null | grep -q "$OP_ACCOUNT"; then
   echo "Adding 1Password account $OP_ACCOUNT..."
+  printf "Enter your Secret Key: " >/dev/tty
+  read -r OP_SECRET_KEY </dev/tty
+  export OP_SECRET_KEY
   op account add --address "$OP_ACCOUNT" --email "$OP_EMAIL" </dev/tty
+  unset OP_SECRET_KEY
 fi
 
 echo "Signing in to 1Password..."
