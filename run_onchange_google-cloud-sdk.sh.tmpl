@@ -1,15 +1,18 @@
-#!/bin/bash
+#!/bin/zsh
 
 set -eu
 
 {{ if stat "../google-cloud-sdk/VERSION" }}
 # filled by the template engine to trigger re-runs of this script on version changes
 # gcloud version: {{ include "../google-cloud-sdk/VERSION" }}
-{{ end }}
+{{ end -}}
 
 gcloud_home="${XDG_DATA_HOME}/google-cloud-sdk"
 
-if [[ -f "${gcloud_home}/install.sh" ]]; then
-  gcloud_home="${XDG_DATA_HOME}/google-cloud-sdk"
-  ${gcloud_home}/install.sh --usage-reporting=false --command-completion=false --path-update=false
+if ! [[ -d ${gcloud_home} ]]; then
+  url=https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-{{ .chezmoi.os }}-{{ if eq .chezmoi.arch "arm64" }}arm{{ else }}{{ .chezmoi.arch }}{{ end }}.tar.gz
+  mkdir -p ${gcloud_home}
+  curl -s ${url} | tar --strip-components=1 -C ${gcloud_home} -zxf -
 fi
+
+${gcloud_home}/install.sh --usage-reporting=false --command-completion=false --path-update=false
