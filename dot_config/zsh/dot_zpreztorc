@@ -17,12 +17,12 @@ zstyle ':prezto:load' pmodule \
   'directory' \
   'spectrum' \
   'utility' \
-  'completion' \
   'history-substring-search' \
   'prompt' \
   'osx' \
   'autosuggestions' \
   'node' \
+  'completion' \
   'python'
 
 zstyle ':prezto:module:editor' key-bindings 'emacs'
