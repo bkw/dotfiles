@@ -21,9 +21,10 @@ zstyle ':prezto:load' pmodule \
   'prompt' \
   'osx' \
   'autosuggestions' \
-  'node' \
   'completion' \
   'python'
+
+#  'node' 
 
 zstyle ':prezto:module:editor' key-bindings 'emacs'
 zstyle ':prezto:module:editor' dot-expansion 'no'
