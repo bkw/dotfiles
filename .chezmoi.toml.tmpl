@@ -1,3 +1,11 @@
+{{- $opSignedIn := false -}}
+{{- if lookPath "op" -}}
+{{-   $accounts := output "op" "account" "list" "--format=json" | fromJson -}}
+{{-   if $accounts -}}
+{{-     $opSignedIn = true -}}
+{{-   end -}}
+{{- end -}}
+
 [onepassword]
 mode = "account"
 
@@ -11,7 +19,16 @@ autoCommit = true
 autoPush = true
 
 [data]
+{{- if $opSignedIn }}
 name = {{ onepasswordRead "op://Private/Dotfiles data/name" | quote }}
 email = {{ onepasswordRead "op://Private/Dotfiles data/email" | quote }}
 signingKey = {{ onepasswordRead "op://Private/Dotfiles data/signing-key" | quote }}
 githubUser = {{ onepasswordRead "op://Private/Dotfiles data/github-user" | quote }}
+{{- else }}
+name = {{ promptStringOnce . "name" "Full name" | quote }}
+email = {{ promptStringOnce . "email" "Email address" | quote }}
+signingKey = {{ promptStringOnce . "signingKey" "SSH signing key" | quote }}
+githubUser = {{ promptStringOnce . "githubUser" "GitHub username" | quote }}
+{{- end }}
+opAccount = "jackhuhn.1password.com"
+opEmail = "bkw@weisshuhn.de"
