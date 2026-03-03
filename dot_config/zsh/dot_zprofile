@@ -44,7 +44,3 @@ path=(
   $HOME/.deno/bin
   # $HOME/.lmstudio/bin
 )
-
-if [[ -d "/opt/homebrew/share/zsh/site-functions" ]]; then
-  fpath[1,0]="/opt/homebrew/share/zsh/site-functions";
-fi
