@@ -25,10 +25,10 @@ email = {{ onepasswordRead "op://Private/Dotfiles data/email" | quote }}
 signingKey = {{ onepasswordRead "op://Private/Dotfiles data/signing-key" | quote }}
 githubUser = {{ onepasswordRead "op://Private/Dotfiles data/github-user" | quote }}
 {{- else }}
-name = {{ promptStringOnce . "name" "Full name" | quote }}
-email = {{ promptStringOnce . "email" "Email address" | quote }}
-signingKey = {{ promptStringOnce . "signingKey" "SSH signing key" | quote }}
-githubUser = {{ promptStringOnce . "githubUser" "GitHub username" | quote }}
+name = "pending 1password setup"
+email = "pending 1password setup"
+signingKey = "pending 1password setup"
+githubUser = "pending 1password setup"
 {{- end }}
 opAccount = "jackhuhn.1password.com"
 opEmail = "bkw@weisshuhn.de"
