@@ -41,5 +41,6 @@ path=(
   $XDG_DATA_HOME/google-cloud-sdk/bin
   $HOME/.config/pnpm
   $HOME/.deno/bin
+  $XDG_DATA_HOME/volta/bin
   # $HOME/.lmstudio/bin
 )
