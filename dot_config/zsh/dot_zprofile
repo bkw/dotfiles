@@ -31,6 +31,7 @@ export LC_MESSAGES=$LANG
 path=(
   $HOME/{,s}bin(N)
   /opt/homebrew/opt/ffmpeg-full/bin
+  $XDG_DATA_HOME/volta/bin
   /opt/{homebrew,local}/{,s}bin(N)
   /usr/local/{,s}bin(N)
   $path
@@ -41,6 +42,5 @@ path=(
   $XDG_DATA_HOME/google-cloud-sdk/bin
   $HOME/.config/pnpm
   $HOME/.deno/bin
-  $XDG_DATA_HOME/volta/bin
   # $HOME/.lmstudio/bin
 )
