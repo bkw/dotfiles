@@ -4,6 +4,11 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
+# Indicate when inside a chezmoi shell (chezmoi cd)
+if [[ -n "$CHEZMOI" ]]; then
+  PROMPT="%F{yellow}[chezmoi]%f ${PROMPT}"
+fi
+
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
