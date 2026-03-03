@@ -19,11 +19,11 @@ fi
 
 if ! op account list --format=json 2>/dev/null | grep -q "$OP_ACCOUNT"; then
   echo "Adding 1Password account $OP_ACCOUNT..."
-  op account add --address "$OP_ACCOUNT" --email "$OP_EMAIL"
+  op account add --address "$OP_ACCOUNT" --email "$OP_EMAIL" </dev/tty
 fi
 
 echo "Signing in to 1Password..."
-eval "$(op signin --account "$OP_ACCOUNT")"
+eval "$(op signin --account "$OP_ACCOUNT" </dev/tty)"
 
 # --- chezmoi setup ---
 
