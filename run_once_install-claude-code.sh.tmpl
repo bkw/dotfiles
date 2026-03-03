@@ -1,0 +1,9 @@
+#!/bin/bash
+
+set -euo pipefail
+
+# Install Claude Code CLI if not already present
+if ! command -v claude &>/dev/null && ! [[ -x "{{ .chezmoi.homeDir }}/.local/bin/claude" ]]; then
+  echo "Installing Claude Code CLI..."
+  curl -fsSL https://claude.ai/install.sh | bash
+fi
