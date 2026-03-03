@@ -1,6 +1,7 @@
 # zlogout (login shells only)
 
-# prezto:
-if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/runcoms/zlogout" ]]; then
-  source "${ZDOTDIR:-$HOME}/.zprezto/runcoms/zlogout"
-fi
+# prezto is not doing anything useful here
+# if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/runcoms/zlogout" ]]; then
+#   source "${ZDOTDIR:-$HOME}/.zprezto/runcoms/zlogout"
+# fi
+
