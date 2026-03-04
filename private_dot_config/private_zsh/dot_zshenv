@@ -28,6 +28,7 @@ export AWS_SHARED_CREDENTIALS_FILE="$XDG_CONFIG_HOME"/aws/credentials
 export AWS_CONFIG_FILE="$XDG_CONFIG_HOME"/aws/config
 export DOCKER_CONFIG="$XDG_CONFIG_HOME"/docker
 export NPM_CONFIG_INIT_MODULE="$XDG_CONFIG_HOME"/npm/config/npm-init.js
+export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME"/npm/npmrc
 export PNPM_HOME="$XDG_CONFIG_HOME"/pnpm
 export LE_WORKING_DIR="$XDG_CONFIG_HOME"/acme.sh
 
