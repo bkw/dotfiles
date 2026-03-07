@@ -1,0 +1,33 @@
+#!/bin/bash
+{{ if ne .chezmoi.os "linux" -}}
+exit 0
+{{ end -}}
+
+set -euo pipefail
+
+GPG_KEY_ID="2BEDECC29CF02D1B63F074EB24FECFB0EB835291"
+GNUPGHOME="${XDG_DATA_HOME:-$HOME/.local/share}/gnupg"
+PASSWORD_STORE_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/pass"
+export GNUPGHOME PASSWORD_STORE_DIR
+
+# Import GPG secret key from 1Password if not already present
+if ! gpg --list-secret-keys "$GPG_KEY_ID" &>/dev/null; then
+  echo "Importing GPG key from 1Password..."
+  op document get "GPG Secret Key" --vault Private | gpg --import
+fi
+
+# Configure gpg-agent
+mkdir -p "$GNUPGHOME"
+chmod 700 "$GNUPGHOME"
+cat > "$GNUPGHOME/gpg-agent.conf" <<EOF
+default-cache-ttl 28800
+max-cache-ttl 28800
+EOF
+chmod 600 "$GNUPGHOME/gpg-agent.conf"
+gpgconf --kill gpg-agent
+
+# Initialize pass if not already set up
+if [[ ! -d "$PASSWORD_STORE_DIR" ]]; then
+  echo "Initializing pass..."
+  pass init "$GPG_KEY_ID"
+fi
