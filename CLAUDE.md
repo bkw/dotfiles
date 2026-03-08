@@ -50,10 +50,24 @@ curl -fsSL https://raw.githubusercontent.com/bkw/dotfiles/main/install.sh | bash
 - macOS: signs via 1Password app (`op-ssh-sign`)
 - Linux: signs via `ssh-keygen`
 
+### Key Tooling
+
+- **Neovim**: LazyVim-based config at `private_dot_config/private_nvim/`
+- **LazyGit**: branch prefix from `.githubUser`, at `private_dot_config/private_lazygit/`
+- **Jujutsu (jj)**: alternative VCS config at `private_dot_config/private_jj/`
+- **Git pager**: `delta` with `difftastic` support
+- **Topgrade**: system update orchestrator (disables ruby_gems/gem)
+- **ZSH framework**: Prezto (steeef prompt theme, emacs keybindings)
+
 ### External Dependencies (`.chezmoiexternal.toml.tmpl`)
 
 - **Prezto** (zsh framework) — git-repo, weekly refresh, recursive clone
 - **oh-my-tmux** — archive, weekly refresh
+
+### ZSH Load Order
+
+`dot_zshenv` (root) sets `ZDOTDIR`, then under `private_dot_config/private_zsh/`:
+`dot_zshenv` → `dot_zprofile` (PATH, EDITOR) → `dot_zlogin` → `dot_zshrc.tmpl` (interactive: Prezto, aliases, completions, gh wrapper on Linux)
 
 ### Run Scripts
 
@@ -75,6 +89,15 @@ curl -fsSL https://raw.githubusercontent.com/bkw/dotfiles/main/install.sh | bash
 
 All tools configured for XDG directories in `dot_zshenv`. `ZDOTDIR` is `$XDG_CONFIG_HOME/zsh`. The pass store lives at `$XDG_DATA_HOME/pass`, GNUPGHOME at `$XDG_DATA_HOME/gnupg`.
 
+### 1Password Fallback
+
+If 1Password is not signed in, template data fields fall back to `"pending 1password setup"`. This allows `chezmoi apply` to succeed partially without 1Password, but the resulting configs will contain placeholder values.
+
 ### Conditional Ignores (`.chezmoiignore.tmpl`)
 
-The pass store (`.local/share/pass/**`) is excluded on non-Linux systems.
+- `README.md` and `install.sh` — always ignored (repo-only files)
+- `.local/share/pass/**` — excluded on non-Linux systems
+
+### SSH Keys
+
+Authorized keys in `private_dot_ssh/private_authorized_keys`. Current key names: `bkw-2026`, `id_rsa`, `id_ed25519`.
