@@ -49,11 +49,10 @@ fi
 
 {{ if eq .chezmoi.os "linux" -}}
 # gh auth via pass (GPG-encrypted token store) — op shell plugins
-# require the 1Password desktop app which isn't available on headless Linux
+# require the 1Password desktop app which isn't available on headless Linux.
+# Injected per-command to avoid leaking the token into the environment.
 if (( $+commands[pass] )); then
-  _gh_token="$(pass show gh/github.com 2>/dev/null)"
-  [[ -n "$_gh_token" ]] && export GH_TOKEN="$_gh_token"
-  unset _gh_token
+  gh() { GH_TOKEN="$(pass show gh/github.com)" command gh "$@" }
 fi
 {{- end }}
 
