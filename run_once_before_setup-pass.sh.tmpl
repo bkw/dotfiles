@@ -25,6 +25,10 @@ gpgconf --kill gpg-agent
 
 # Import GPG secret key from 1Password if not already present
 if ! gpg --list-secret-keys "$GPG_KEY_ID" &>/dev/null; then
+  if ! op account list &>/dev/null || ! op whoami &>/dev/null; then
+    echo "Signing in to 1Password..."
+    eval "$(op signin)"
+  fi
   echo "Importing GPG key from 1Password..."
   op document get "GPG Secret Key" --vault Private | gpg --batch --import
 fi
