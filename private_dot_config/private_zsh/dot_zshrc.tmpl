@@ -24,6 +24,10 @@ unsetopt sharehistory
 alias -- +x='chmod +x'
 alias vim=nvim
 
+# Debian renames some tools to avoid clashes
+(( $+commands[fdfind] )) && ! (( $+commands[fd] )) && alias fd=fdfind
+(( $+commands[batcat] )) && ! (( $+commands[bat] )) && alias bat=batcat
+
 # Google Cloud Completions
 if [[ -f "$XDG_DATA_HOME/google-cloud-sdk/completion.zsh.inc" ]]; then
   source "$XDG_DATA_HOME/google-cloud-sdk/completion.zsh.inc"
