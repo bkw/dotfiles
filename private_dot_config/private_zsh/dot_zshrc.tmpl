@@ -42,16 +42,8 @@ alias brow='arch --x86_64 /usr/local/Homebrew/bin/brew'
 # 1password https://developer.1password.com/docs/cli/get-started/#shell-completion
 if (( $+commands[op] )); then
   eval "$(op completion zsh)"; compdef _op op
+  source ${XDG_CONFIG_HOME}/op/plugins.sh
 fi
-
-{{ if eq .chezmoi.os "linux" -}}
-# gh auth via pass (GPG-encrypted token store)
-if (( $+commands[pass] )); then
-  _gh_token="$(pass show gh/github.com 2>/dev/null)"
-  [[ -n "$_gh_token" ]] && export GH_TOKEN="$_gh_token"
-  unset _gh_token
-fi
-{{- end }}
 
 # fnm
 if (( $+commands[fnm] )); then
